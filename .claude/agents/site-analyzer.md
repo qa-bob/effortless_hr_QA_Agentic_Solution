@@ -1,3 +1,14 @@
+---
+name: site-analyzer
+description: Crawls a live website and produces a fully-populated site.config.json. Use this agent when onboarding a new site, verifying config is still accurate after a redesign, or when running /analyze-site. It navigates pages, extracts nav links, detects forms, infers industry, and checks auth gating.
+model: claude-sonnet-4-6
+tools:
+  - WebFetch
+  - Read
+  - Write
+  - Bash
+---
+
 # Agent: site-analyzer
 
 ## Role
@@ -85,15 +96,9 @@ A valid `site.config.json` object with all fields populated based on what was di
 - Try scrolling to 20% page height before re-querying
 - If still no nav, set `expectedNavItems: []` and note the issue
 
-### Multi-page sites vs single-page apps
-- For SPAs: nav "links" may be `<button>` elements that update the hash — record these too
-- Use `href` to distinguish true navigation links from in-page interactive elements
-
 ## Output format
 
 Always output:
 1. The complete `site.config.json` JSON block
 2. An "Issues found" checklist of anything that should be fixed on the site
 3. A brief confidence assessment (High / Medium / Low) with reasoning
-
-Low confidence examples: auth-gated, heavy SPA with deferred rendering, site returned 5xx during analysis.

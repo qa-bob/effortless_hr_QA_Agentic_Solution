@@ -1,23 +1,28 @@
-﻿{
-    "name":  "Effortless HR",
-    "url":  "https://www.effortlesshr.com",
-    "description":  "",
-    "industry":  "",
-    "hasContactForm":  true,
-    "expectedNavItems":  [
-
-                         ],
-    "viewports":  [
-                      "desktop",
-                      "mobile",
-                      "tablet"
-                  ],
-    "skipVisual":  false,
-    "skipForms":  false,
-    "auth":  {
-                 "required":  false,
-                 "loginUrl":  "",
-                 "username":  "",
-                 "password":  ""
-             }
+{
+    "name": "EffortlessHR",
+    "url": "https://www.effortlesshr.com",
+    "description": "Online HR software for small businesses (1–100 employees) — cloud-based HRIS with employee management, PTO tracking, time clock, self-service portal, and document storage.",
+    "industry": "HR SaaS — Small Business",
+    "hasContactForm": true,
+    "expectedNavItems": [
+        "Pricing",
+        "Customers",
+        "Partners",
+        "Solutions",
+        "College Instructors",
+        "About Us"
+    ],
+    "viewports": [
+        "desktop",
+        "mobile",
+        "tablet"
+    ],
+    "skipVisual": false,
+    "skipForms": false,
+    "auth": {
+        "required": false,
+        "loginUrl": "",
+        "username": "",
+        "password": ""
+    }
 }

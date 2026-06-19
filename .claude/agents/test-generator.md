@@ -1,3 +1,17 @@
+---
+name: test-generator
+description: Generates site-specific Playwright TypeScript test files for features not covered by the generic test suites. Use when a site has unique functionality (pricing calculators, interactive tools, multi-step flows), when specific page coverage is requested, or when writing regression tests for a discovered bug. Reads site.config.json and writes to tests/custom/.
+model: claude-sonnet-4-6
+tools:
+  - Read
+  - Write
+  - Edit
+  - WebFetch
+  - Bash
+  - Glob
+  - Grep
+---
+
 # Agent: test-generator
 
 ## Role
@@ -51,44 +65,6 @@ Each generated file must:
 4. **Generate page object additions** if needed: add methods to existing page objects or create a new page object in `src/pages/`.
 5. **Write the spec file(s)** following the framework conventions.
 6. **Validate mentally:** ensure each test is independent, uses proper waits, and has a clear assertion.
-
-## Example: Pricing page test
-
-Given `expectedNavItems: ["Home", "Features", "Pricing", "Contact"]`:
-
-```typescript
-// tests/custom/pricing-page.spec.ts
-/**
- * Site-specific tests for the Pricing page.
- * Generated for: Acme Corp (https://acmecorp.com)
- * Reason: Pricing page is a high-conversion page — verify it loads and
- *         displays plan options correctly.
- */
-
-import { test, expect } from '@fixtures/site.fixture';
-
-test.describe('Pricing Page @custom', () => {
-  test.beforeEach(async ({ page, siteConfig }) => {
-    await page.goto(siteConfig.url.replace(/\/$/, '') + '/pricing', {
-      waitUntil: 'domcontentloaded',
-    });
-  });
-
-  test('pricing page loads and has plan options @custom @smoke', async ({ page }) => {
-    // At least one pricing tier should be visible
-    const planCards = page.locator('[class*="plan"], [class*="pricing-card"], [class*="tier"]');
-    await expect(planCards.first()).toBeVisible({ timeout: 10_000 });
-    expect(await planCards.count()).toBeGreaterThan(0);
-  });
-
-  test('pricing page has a CTA for each plan @custom', async ({ page }) => {
-    const ctaButtons = page.locator('[class*="plan"] a, [class*="plan"] button').filter({
-      hasText: /get started|sign up|try free|choose|select/i,
-    });
-    expect(await ctaButtons.count()).toBeGreaterThan(0);
-  });
-});
-```
 
 ## Conventions for generated files
 

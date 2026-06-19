@@ -1,0 +1,27 @@
+# CODEOWNERS
+# Each line maps a file pattern to one or more owners.
+# Owners are notified when a PR modifies matching files.
+# Format: <pattern> <@owner-or-team>
+#
+# Replace placeholders with actual GitHub usernames or teams.
+
+# Default owner for everything in the repo
+*                               @rosmall
+
+# Core framework files — require review from a QA lead
+CLAUDE.md                       @rosmall
+AGENTS.md                       @rosmall
+Skills.md                       @rosmall
+site.config.json                @rosmall
+playwright.config.ts            @rosmall
+tsconfig.json                   @rosmall
+
+# Page objects — structural changes need careful review
+src/pages/                      @rosmall
+src/fixtures/                   @rosmall
+
+# CI pipeline
+.github/workflows/              @rosmall
+
+# Claude Code configuration
+.claude/                        @rosmall
