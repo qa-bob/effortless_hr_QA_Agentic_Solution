@@ -17,7 +17,7 @@ test.describe('About Page @functional', () => {
     await page.goto(siteConfig.url.replace(/\/$/, '') + ABOUT_PATH, {
       waitUntil: 'domcontentloaded',
     });
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('load');
   });
 
   // ── Page loads ──────────────────────────────────────────────────────────────

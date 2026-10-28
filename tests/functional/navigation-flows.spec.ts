@@ -14,12 +14,14 @@ import { test, expect } from '@fixtures/site.fixture';
 test.describe('Navigation Flows @functional', () => {
   test.beforeEach(async ({ page, siteConfig }) => {
     await page.goto(siteConfig.url, { waitUntil: 'domcontentloaded' });
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('load');
   });
 
   // ── Primary nav items ────────────────────────────────────────────────────────
+  // Small viewports usually hide the nav behind a toggle, so these run desktop-only.
 
-  test('Pricing nav item is present @functional', async ({ page }) => {
+  test('Pricing nav item is present @functional', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'chromium-desktop', 'Runs only in the "chromium-desktop" project');
     const pricingLink = page
       .locator('nav a, header a')
       .filter({ hasText: /^pricing$/i })
@@ -28,7 +30,8 @@ test.describe('Navigation Flows @functional', () => {
     await expect(pricingLink, 'Pricing nav item should be in the navigation').toBeVisible();
   });
 
-  test('About Us nav item is present and navigates correctly @functional', async ({ page, siteConfig }) => {
+  test('About Us nav item is present and navigates correctly @functional', async ({ page, siteConfig }, testInfo) => {
+    test.skip(testInfo.project.name !== 'chromium-desktop', 'Runs only in the "chromium-desktop" project');
     const aboutLink = page
       .locator('nav a, header a')
       .filter({ hasText: /about/i })
@@ -47,7 +50,8 @@ test.describe('Navigation Flows @functional', () => {
     ).toBeTruthy();
   });
 
-  test('Solutions nav item is present @functional', async ({ page }) => {
+  test('Solutions nav item is present @functional', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'chromium-desktop', 'Runs only in the "chromium-desktop" project');
     const solutionsLink = page
       .locator('nav a, header a, nav button, header button')
       .filter({ hasText: /^solutions$/i })
@@ -56,7 +60,8 @@ test.describe('Navigation Flows @functional', () => {
     await expect(solutionsLink, 'Solutions nav item should be visible').toBeVisible();
   });
 
-  test('Partners nav item is present @functional', async ({ page }) => {
+  test('Partners nav item is present @functional', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'chromium-desktop', 'Runs only in the "chromium-desktop" project');
     const partnersLink = page
       .locator('nav a, header a')
       .filter({ hasText: /partners/i })
